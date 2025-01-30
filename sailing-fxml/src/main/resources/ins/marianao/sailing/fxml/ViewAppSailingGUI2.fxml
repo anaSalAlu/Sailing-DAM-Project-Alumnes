@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="720.0" prefWidth="900.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ins.marianao.sailing.fxml.ControllerMenu">
+  <children>
+    <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="true" text="%fxml.text.menu.file">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#exitClick" text="%fxml.text.menu.file.exit">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+          </items>
+        </Menu>
+            <Menu fx:id="mnTrips" mnemonicParsing="true" text="%fxml.text.menu.trips">
+              <items>
+                <MenuItem fx:id="mnItBooking" mnemonicParsing="false" onAction="#bookingMenuClick" text="%fxml.text.menu.trips.booking">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem fx:id="mnItTrips" mnemonicParsing="false" onAction="#tripsMenuClick" text="%fxml.text.menu.trips.view">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+              </items>
+            </Menu>
+            <Menu fx:id="mnUsers" mnemonicParsing="false" text="%fxml.text.menu.users">
+              <items>
+                <MenuItem fx:id="mnItAddUser" mnemonicParsing="false" onAction="#newUserMenuClick" text="%fxml.text.menu.users.new">
+                <accelerator>
+                        <KeyCodeCombination alt="UP" code="U" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="mnItUserDirectory" mnemonicParsing="false" onAction="#usersDirectoryMenuClick" text="%fxml.text.menu.users.directory">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="mnItImport" mnemonicParsing="false" onAction="#importUsersMenuClick" text="%fxml.text.menu.users.import" />
+                  <MenuItem fx:id="mnItExport" mnemonicParsing="false" onAction="#exportUsersMenuClick" text="%fxml.text.menu.users.export" />
+              </items>
+            </Menu>
+            <Menu fx:id="mnProfile" mnemonicParsing="false" text="%fxml.text.menu.profile">
+               <items>
+                  <MenuItem fx:id="mnItEditProfile" mnemonicParsing="false" onAction="#editProfileMenuClick" text="%fxml.text.menu.profile.edit">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="mnItLogoff" mnemonicParsing="false" onAction="#logoffClick" text="%fxml.text.menu.profile.logoff">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+               </items>
+            </Menu>
+            <Menu fx:id="mnLogin" mnemonicParsing="false" text="%fxml.text.menu.login">
+               <items>
+                  <MenuItem fx:id="mnItLogin" mnemonicParsing="false" onAction="#loginMenuClick" text="%fxml.text.menu.login.form">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem fx:id="mnItRegister" mnemonicParsing="false" onAction="#newUserMenuClick" text="%fxml.text.menu.register.form">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+               </items></Menu>
+        <Menu mnemonicParsing="true" text="%fxml.text.menu.help">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#aboutMenuClick" text="%fxml.text.menu.help.about" />
+
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+      <BorderPane fx:id="appRootPane">
+
+	<top>
+		<AnchorPane styleClass="topregion" BorderPane.alignment="CENTER">
+			<children>
+				<ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+					<image>
+						<Image url="@resources/insmarianao.png" />
+					</image>
+				</ImageView>
+				<Label layoutX="21.0" layoutY="18.0" prefHeight="80.0" prefWidth="518.0" styleClass="title" text="%fxml.text.app.title" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+			</children>
+		</AnchorPane>
+	</top>
+	<center>
+		<AnchorPane fx:id="portviewPane" styleClass="centerregion" BorderPane.alignment="CENTER" />
+	</center>
+	</BorderPane>
+  </children>
+</VBox>

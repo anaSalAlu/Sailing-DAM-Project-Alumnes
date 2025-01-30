@@ -54,16 +54,16 @@
             				<TableView fx:id="usersTable" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="460.0" prefWidth="903.0">
             					<columns>
                               <TableColumn fx:id="colIndex" editable="false" maxWidth="100.0" minWidth="50.0" prefWidth="50.0" styleClass="col-center" text="#" />
-                              <TableColumn fx:id="colRole" editable="false" maxWidth="300.0" minWidth="51.0" prefWidth="223.0" styleClass="col-center" text="%Client" />
-            						<TableColumn fx:id="colUsername" maxWidth="300.0" minWidth="0.0" prefWidth="86.0" styleClass="col-center" text="%Category" />
-            						<TableColumn fx:id="colFullname" maxWidth="600.0" minWidth="54.0" prefWidth="114.0" styleClass="col-left" text="%Title" />
-            						<TableColumn fx:id="colPhone" maxWidth="657.0" minWidth="50.0" prefWidth="56.0" styleClass="col-center" text="%Max." />
-                              <TableColumn fx:id="colPhone1" maxWidth="574.0" minWidth="80.0" styleClass="col-center" text="%Booked" />
-                              <TableColumn fx:id="colPhone12" maxWidth="417.0" minWidth="0.0" prefWidth="108.0" styleClass="col-center" text="%Status" />
-                              <TableColumn fx:id="colPhone13" maxWidth="363.0" minWidth="42.0" prefWidth="111.0" styleClass="col-center" text="%Date" />
-                              <TableColumn fx:id="colPhone121" maxWidth="415.0" minWidth="100.0" prefWidth="139.0" styleClass="col-center" text="%Departure" />
-                              <TableColumn fx:id="colPhone11" maxWidth="360.0" minWidth="52.0" prefWidth="77.0" styleClass="col-center" text="%Places" />
-                              <TableColumn fx:id="colPhone14" maxWidth="329.0" minWidth="67.0" prefWidth="140.0" styleClass="col-center" text="%Comments" />
+                              <TableColumn fx:id="colRole" editable="false" maxWidth="300.0" minWidth="51.0" prefWidth="223.0" styleClass="col-center" text="%fxml.text.booking.client" />
+            						<TableColumn fx:id="colUsername" maxWidth="300.0" minWidth="0.0" prefWidth="86.0" styleClass="col-center" text="%fxml.text.booking.category" />
+            						<TableColumn fx:id="colFullname" maxWidth="600.0" minWidth="54.0" prefWidth="114.0" styleClass="col-left" text="%fxml.text.booking.title" />
+            						<TableColumn fx:id="colPhone" maxWidth="657.0" minWidth="50.0" prefWidth="56.0" styleClass="col-center" text="%fxml.text.booking.max" />
+                              <TableColumn fx:id="colPhone1" maxWidth="574.0" minWidth="80.0" styleClass="col-center" text="%fxml.text.booking.booked" />
+                              <TableColumn fx:id="colPhone12" maxWidth="417.0" minWidth="0.0" prefWidth="108.0" styleClass="col-center" text="%fxml.text.booking.status" />
+                              <TableColumn fx:id="colPhone13" maxWidth="363.0" minWidth="42.0" prefWidth="111.0" styleClass="col-center" text="%fxml.text.booking.date" />
+                              <TableColumn fx:id="colPhone121" maxWidth="415.0" minWidth="100.0" prefWidth="139.0" styleClass="col-center" text="%fxml.text.booking.departure" />
+                              <TableColumn fx:id="colPhone11" maxWidth="360.0" minWidth="52.0" prefWidth="77.0" styleClass="col-center" text="%fxml.text.booking.places" />
+                              <TableColumn fx:id="colPhone14" maxWidth="329.0" minWidth="67.0" prefWidth="140.0" styleClass="col-center" text="%fxml.text.booking.comments" />
                               <TableColumn fx:id="colUsername1" maxWidth="300.0" minWidth="0.0" prefWidth="35.0" styleClass="col-center" />
                               <TableColumn fx:id="colFullname1" maxWidth="600.0" minWidth="26.0" prefWidth="35.0" styleClass="col-left" />
                               <TableColumn fx:id="colPhone2" maxWidth="329.0" minWidth="25.0" prefWidth="35.0" styleClass="col-center" />

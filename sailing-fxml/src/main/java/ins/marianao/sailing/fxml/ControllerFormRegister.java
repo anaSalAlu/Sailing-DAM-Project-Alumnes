@@ -65,16 +65,4 @@ public class ControllerFormRegister implements Initializable {
 
 	}
 
-	/**
-	 * Called when btnLogin button is fired.
-	 *
-	 * @param event the action event.
-	 */
-	@FXML
-	public void registerClick(ActionEvent event) {
-
-		ResourceManager.getInstance().getMenuController().register(this.tfUser.getText(), this.tfPwd.getText(),
-				this.tfConfirmPwd.getText(), this.tfName.getText(), this.tfPhone.getText());
-	}
-
 }

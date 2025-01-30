@@ -136,7 +136,9 @@ public class ControllerMenu implements Initializable {
 	@FXML
 	public void bookingMenuClick() {
 		try {
-			// TODO Open trip types view. Remove empty view
+			// Open trip types view. Remove empty view
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewTripType.fxml"),
+					ResourceManager.getInstance().getTranslationBundle());
 			BorderPane vista = new BorderPane();
 
 			this.loadView(vista);
@@ -153,7 +155,9 @@ public class ControllerMenu implements Initializable {
 	@FXML
 	public void tripsMenuClick() {
 		try {
-			// TODO Open trips view. Remove empty view
+			// Open trips view. Remove empty view
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewTripsDirectory.fxml"),
+					ResourceManager.getInstance().getTranslationBundle());
 			BorderPane vista = new BorderPane();
 
 			this.loadView(vista);
