@@ -6,9 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
-public class ControllerTripsDirectory extends AbstractControllerPDF {
+public class ControllerBookedTripsList extends AbstractControllerPDF {
 
 	@FXML
     private Button btnPDF;
@@ -74,7 +75,7 @@ public class ControllerTripsDirectory extends AbstractControllerPDF {
     private TableView<?> usersTable;
 
     @FXML
-    private BorderPane viewUsersDirectory;
+    private BorderPane viewBookedTripsList;
 
     @FXML
     public void generarPDFClick(ActionEvent event) {

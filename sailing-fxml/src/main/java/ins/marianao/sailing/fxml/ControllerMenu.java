@@ -87,6 +87,7 @@ public class ControllerMenu implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
 		this.logOff();
+		bookingMenuClick();
 	}
 
 	/**
@@ -135,9 +136,10 @@ public class ControllerMenu implements Initializable {
 	 */
 	@FXML
 	public void bookingMenuClick() {
+		
 		try {
-			// Open trip types view. Remove empty view
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewTripType.fxml"),
+			// Open trip types view. Remove empty view 
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewBookingTrips.fxml"),
 					ResourceManager.getInstance().getTranslationBundle());
 			BorderPane vista = new BorderPane();
 
@@ -155,12 +157,17 @@ public class ControllerMenu implements Initializable {
 	@FXML
 	public void tripsMenuClick() {
 		try {
-			// Open trips view. Remove empty view
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewTripsDirectory.fxml"),
-					ResourceManager.getInstance().getTranslationBundle());
-			BorderPane vista = new BorderPane();
+			// Cargar el FXML con traducciones 
+	        FXMLLoader loader = new FXMLLoader( 
+	                getClass().getResource("ViewBookedTripsList.fxml"),
+	                ResourceManager.getInstance().getTranslationBundle()
+	        );
 
-			this.loadView(vista);
+	        // Cargar la vista desde el FXML
+	        BorderPane vista = loader.load();
+
+	        // Cargar la vista en la ventana actual
+	        this.loadView(vista);
 		} catch (Exception e) {
 			ControllerMenu.showError(ResourceManager.getInstance().getText("error.menu.view.opening"), e.getMessage(),
 					ExceptionUtils.getStackTrace(e));
@@ -272,7 +279,7 @@ public class ControllerMenu implements Initializable {
 		alert.setTitle("About ...");
 		alert.setHeaderText(null);
 		alert.setContentText(
-				"Copyright@" + Calendar.getInstance(new Locale("CA", "ES")).get(Calendar.YEAR) + "\nÀlex Macia");
+				"Copyright@" + Calendar.getInstance(new Locale("CA", "ES")).get(Calendar.YEAR) + "\n Víctor && Ana Trinidad");
 		alert.showAndWait();
 	}
 

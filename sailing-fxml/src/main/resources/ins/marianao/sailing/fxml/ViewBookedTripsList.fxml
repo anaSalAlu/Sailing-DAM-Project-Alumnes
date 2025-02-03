@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="viewUsersDirectory" prefHeight="724.0" prefWidth="1548.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ins.marianao.sailing.fxml.ControllerUsersDirectory">
+<BorderPane fx:id="viewBookedTripsList" prefHeight="724.0" prefWidth="1548.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ins.marianao.sailing.fxml.ControllerBookedTripsList">
    <center>
 		<AnchorPane prefHeight="730.0" prefWidth="1264.0" styleClass="centerregion">
 			<children>
