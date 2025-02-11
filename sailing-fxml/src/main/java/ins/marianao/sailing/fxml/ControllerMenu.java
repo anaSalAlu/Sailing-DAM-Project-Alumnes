@@ -136,19 +136,23 @@ public class ControllerMenu implements Initializable {
 	 */
 	@FXML
 	public void bookingMenuClick() {
-		
-		try {
-			// Open trip types view. Remove empty view 
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewBookingTrips.fxml"),
-					ResourceManager.getInstance().getTranslationBundle());
-			BorderPane vista = new BorderPane();
+	    try {
+	        // Cargar la vista desde el FXML
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewBookingTrips.fxml"),
+	                ResourceManager.getInstance().getTranslationBundle());
 
-			this.loadView(vista);
-		} catch (Exception e) {
-			ControllerMenu.showError(ResourceManager.getInstance().getText("error.menu.view.opening"), e.getMessage(),
-					ExceptionUtils.getStackTrace(e));
-		}
+	        BorderPane vista = loader.load(); 
+
+	        this.loadView(vista); 
+	    } catch (Exception e) {
+	        ControllerMenu.showError(
+	                ResourceManager.getInstance().getText("error.menu.view.opening"),
+	                e.getMessage(),
+	                ExceptionUtils.getStackTrace(e)
+	        );
+	    }
 	}
+
 
 	/**
 	 * Called when Trips menuItem is fired.
