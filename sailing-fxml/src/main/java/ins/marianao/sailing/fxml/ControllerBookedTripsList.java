@@ -2,6 +2,7 @@ package ins.marianao.sailing.fxml;
 
 import java.net.URL;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -23,6 +24,7 @@ import ins.marianao.sailing.fxml.services.ServiceQueryTrips;
 import ins.marianao.sailing.fxml.services.ServiceQueryUsers;
 import ins.marianao.sailing.fxml.utils.Formatters;
 import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -33,13 +35,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 import javafx.util.Pair;
 
 public class ControllerBookedTripsList extends AbstractControllerPDF {
-
+	List<User> client = null;
 	@FXML
 	private ComboBox<Pair<String, String>> cmbCategory;
 
@@ -68,7 +71,7 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 	private TableColumn<Trip, String> colComments;
 
 	@FXML
-	private TableColumn<Trip, Date> colDate;
+	private TableColumn<Trip, String> colDate;
 
 	@FXML
 	private TableColumn<Trip, String> colDeparture;
@@ -89,7 +92,7 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 	private TableColumn<Trip, String> colReschedule;
 
 	@FXML
-	private TableColumn<Trip, String> colRole;
+	private TableColumn<Trip, String> colClient;
 
 	@FXML
 	private TableColumn<Trip, String> colStatus;
@@ -163,7 +166,7 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 			@Override
 			public void handle(WorkerStateEvent event) {
 				// Aquí creas los elementos que quieres añadir al ComboBox
-				List<User> client = queryUsers.getValue();
+				client = queryUsers.getValue();
 
 				// Verificamos que la lista no esté vacía antes de intentar añadirla
 				if (client != null && !client.isEmpty()) {
@@ -191,14 +194,6 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 		/*
 		 * Listeners de los "filtros"
 		 */
-
-		this.colIndex.setCellValueFactory(
-				new Callback<TableColumn.CellDataFeatures<Trip, Number>, ObservableValue<Number>>() {
-					@Override
-					public ObservableValue<Number> call(TableColumn.CellDataFeatures<Trip, Number> trip) {
-						return new SimpleLongProperty(tripsTable.getItems().indexOf(trip.getValue()) + 1);
-					}
-				});
 
 		this.cmbCategory.valueProperty().addListener(new ChangeListener<Pair<String, String>>() {
 			@Override
@@ -251,6 +246,120 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 		 * Control de las columnas
 		 */
 
+		this.colIndex.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Trip, Number>, ObservableValue<Number>>() {
+					@Override
+					public ObservableValue<Number> call(TableColumn.CellDataFeatures<Trip, Number> trip) {
+						return new SimpleLongProperty(tripsTable.getItems().indexOf(trip.getValue()) + 1);
+					}
+				});
+
+		this.colClient.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Trip, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Trip, String> trip) {
+
+						return new SimpleStringProperty(trip.getValue().getClient().getFullName());
+					}
+
+				});
+
+		this.colCategory.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Trip, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Trip, String> trip) {
+						return new SimpleStringProperty(
+								trip.getValue().getDeparture().getTripType().getCategory().toString());
+					}
+
+				});
+
+		this.colTitle.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Trip, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Trip, String> trip) {
+						return new SimpleStringProperty(trip.getValue().getDeparture().getTripType().getTitle());
+					}
+
+				});
+
+		this.colMax.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Trip, Number>, ObservableValue<Number>>() {
+
+					@Override
+					public ObservableValue<Number> call(CellDataFeatures<Trip, Number> trip) {
+						return new SimpleLongProperty(trip.getValue().getDeparture().getTripType().getMaxPlaces());
+					}
+
+				});
+
+		this.colBooked.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Trip, Number>, ObservableValue<Number>>() {
+
+					@Override
+					public ObservableValue<Number> call(CellDataFeatures<Trip, Number> trip) {
+						return new SimpleLongProperty(trip.getValue().getPlaces());
+					}
+
+				});
+
+		this.colStatus.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Trip, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Trip, String> trip) {
+						return new SimpleStringProperty(trip.getValue().getStatus().toString());
+					}
+
+				});
+
+		this.colDate.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Trip, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Trip, String> trip) {
+						String text = (new SimpleDateFormat("dd/MM/yyyy"))
+								.format(trip.getValue().getDeparture().getDate());
+						return new SimpleStringProperty(text);
+					}
+
+				});
+
+		this.colDeparture.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Trip, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Trip, String> trip) {
+						String text = (new SimpleDateFormat("hh:mm"))
+								.format(trip.getValue().getDeparture().getDeparture());
+						return new SimpleStringProperty(text);
+					}
+
+				});
+
+		this.colPlaces.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Trip, Number>, ObservableValue<Number>>() {
+
+					@Override
+					public ObservableValue<Number> call(CellDataFeatures<Trip, Number> trip) {
+						return new SimpleLongProperty(trip.getValue().getPlaces());
+					}
+
+				});
+
+		this.colComments.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Trip, String>, ObservableValue<String>>() {
+
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Trip, String> trip) {
+						return new SimpleStringProperty(trip.getValue().getDeparture().getTripType().getDescription());
+					}
+
+				});
+
 	}
 
 	private void reloadTrips() {
@@ -267,10 +376,13 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 
 		// Date From
 		LocalDate localDate = this.dateFrom.getValue();
-		// TODO Miramos si es nulo y si lo es, entonces pasamos como parámetro el null y
+		Date dateFrom = null;
+		// Miramos si es nulo y si lo es, entonces pasamos como parámetro el null y
 		// sino hacemos la conversión
-		Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-		Date dateFrom = (Date) Date.from(instant);
+		if (localDate != null) {
+			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+			dateFrom = (Date) Date.from(instant);
+		}
 
 		// Status
 		Status[] statuses = null;
@@ -281,8 +393,13 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 
 		// Date To
 		LocalDate localDateTo = this.dateTo.getValue();
-		Instant instantTo = Instant.from(localDateTo.atStartOfDay(ZoneId.systemDefault()));
-		Date dateTo = (Date) Date.from(instantTo);
+		// Miramos si es nulo y si lo es, entonces pasamos como parámetro el null y
+		// sino hacemos la conversión
+		Date dateTo = null;
+		if (localDateTo != null) {
+			Instant instantTo = Instant.from(localDateTo.atStartOfDay(ZoneId.systemDefault()));
+			dateTo = (Date) Date.from(instantTo);
+		}
 
 		final ServiceQueryTrips queryTrips = new ServiceQueryTrips(categories, client, dateFrom, statuses, dateTo);
 

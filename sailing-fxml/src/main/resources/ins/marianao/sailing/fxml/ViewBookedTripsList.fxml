@@ -52,10 +52,10 @@
                <children>
                   <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                      <content>
-            				<TableView fx:id="usersTable" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="460.0" prefWidth="903.0">
+            				<TableView fx:id="tripsTable" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="460.0" prefWidth="903.0">
             					<columns>
                               <TableColumn fx:id="colIndex" editable="false" maxWidth="100.0" minWidth="50.0" prefWidth="50.0" styleClass="col-center" text="#" />
-                              <TableColumn fx:id="colRole" editable="false" maxWidth="300.0" minWidth="51.0" prefWidth="223.0" styleClass="col-center" text="%fxml.text.booking.client" />
+                              <TableColumn fx:id="colClient" editable="false" maxWidth="300.0" minWidth="51.0" prefWidth="223.0" styleClass="col-center" text="%fxml.text.booking.client" />
             						<TableColumn fx:id="colCategory" maxWidth="300.0" minWidth="0.0" prefWidth="86.0" styleClass="col-center" text="%fxml.text.booking.category" />
             						<TableColumn fx:id="colTitle" maxWidth="600.0" minWidth="54.0" prefWidth="114.0" styleClass="col-left" text="%fxml.text.booking.title" />
             						<TableColumn fx:id="colMax" maxWidth="657.0" minWidth="50.0" prefWidth="56.0" styleClass="col-center" text="%fxml.text.booking.max" />
