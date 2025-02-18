@@ -22,7 +22,9 @@ import ins.marianao.sailing.fxml.exception.OnFailedEventHandler;
 import ins.marianao.sailing.fxml.manager.ResourceManager;
 import ins.marianao.sailing.fxml.services.ServiceQueryTrips;
 import ins.marianao.sailing.fxml.services.ServiceQueryUsers;
+import ins.marianao.sailing.fxml.utils.ColumnButton;
 import ins.marianao.sailing.fxml.utils.Formatters;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -37,6 +39,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 import javafx.util.Pair;
@@ -62,7 +65,7 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 	private TableColumn<Trip, Number> colBooked;
 
 	@FXML
-	private TableColumn<Trip, String> colCancel;
+	private TableColumn<Trip, Boolean> colCancel;
 
 	@FXML
 	private TableColumn<Trip, String> colCategory;
@@ -77,7 +80,7 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 	private TableColumn<Trip, String> colDeparture;
 
 	@FXML
-	private TableColumn<Trip, String> colDone;
+	private TableColumn<Trip, Boolean> colDone;
 
 	@FXML
 	private TableColumn<Trip, Number> colIndex;
@@ -89,7 +92,7 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 	private TableColumn<Trip, Number> colPlaces;
 
 	@FXML
-	private TableColumn<Trip, String> colReschedule;
+	private TableColumn<Trip, Boolean> colReschedule;
 
 	@FXML
 	private TableColumn<Trip, String> colClient;
@@ -420,7 +423,90 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 		queryTrips.setOnFailed(
 				new OnFailedEventHandler(ResourceManager.getInstance().getText("error.viewUsers.web.service")));
 
+		// System.out.println("Trips: " + queryTrips.getValue());
+
 		queryTrips.start();
+
+		/*
+		 * Botones
+		 */
+
+		this.colReschedule.setMinWidth(50);
+		this.colReschedule.setMaxWidth(70);
+		// define a simple boolean cell value for the action column so that the column
+		// will only be shown for non-empty rows.
+		this.colReschedule.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Trip, Boolean>, ObservableValue<Boolean>>() {
+
+					@Override
+					public ObservableValue<Boolean> call(CellDataFeatures<Trip, Boolean> param) {
+						return new SimpleBooleanProperty(false);
+					}
+
+				});
+
+		this.colReschedule.setCellFactory(
+				new ColumnButton<Trip, Boolean>(ResourceManager.getInstance().getText("fxml.text.viewUsers.col.update"),
+						new Image(getClass().getResourceAsStream("resources/reschedule.png"))) {
+					@Override
+					public void buttonAction(Trip trip) {
+						ResourceManager.getInstance().getMenuController();
+					}
+				});
+
+		this.colCancel.setMinWidth(50);
+		this.colCancel.setMaxWidth(70);
+		// define a simple boolean cell value for the action column so that the column
+		// will only be shown for non-empty rows.
+		this.colCancel.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Trip, Boolean>, ObservableValue<Boolean>>() {
+
+					@Override
+					public ObservableValue<Boolean> call(CellDataFeatures<Trip, Boolean> param) {
+						return new SimpleBooleanProperty(false);
+					}
+
+				});
+
+		this.colCancel.setCellFactory(
+				new ColumnButton<Trip, Boolean>(ResourceManager.getInstance().getText("fxml.text.viewUsers.col.update"),
+						new Image(getClass().getResourceAsStream("resources/cancel.png"))) {
+					@Override
+					public void buttonAction(Trip trip) {
+						ResourceManager.getInstance().getMenuController();
+					}
+				});
+
+		ResourceManager.getInstance().getStage().heightProperty().addListener(event -> {
+			viewBookedTripsList.setPrefHeight(ResourceManager.getInstance().getStage().getHeight());
+		});
+
+		this.colDone.setMinWidth(50);
+		this.colDone.setMaxWidth(70);
+		// define a simple boolean cell value for the action column so that the column
+		// will only be shown for non-empty rows.
+		this.colDone.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Trip, Boolean>, ObservableValue<Boolean>>() {
+
+					@Override
+					public ObservableValue<Boolean> call(CellDataFeatures<Trip, Boolean> param) {
+						return new SimpleBooleanProperty(false);
+					}
+
+				});
+
+		this.colDone.setCellFactory(
+				new ColumnButton<Trip, Boolean>(ResourceManager.getInstance().getText("fxml.text.viewUsers.col.update"),
+						new Image(getClass().getResourceAsStream("resources/done.png"))) {
+					@Override
+					public void buttonAction(Trip trip) {
+						ResourceManager.getInstance().getMenuController();
+					}
+				});
+
+		ResourceManager.getInstance().getStage().heightProperty().addListener(event -> {
+			viewBookedTripsList.setPrefHeight(ResourceManager.getInstance().getStage().getHeight());
+		});
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package ins.marianao.sailing.fxml;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import cat.institutmarianao.sailing.ws.model.User;
 import ins.marianao.sailing.fxml.manager.ResourceManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -62,7 +63,21 @@ public class ControllerFormRegister implements Initializable {
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		ResourceManager manager = ResourceManager.getInstance();
+		User currentUser = manager.getCurrentUser();
+		if (!currentUser.isAdmin()) {
+			cbRole.setVisible(false);
+		}
+	}
 
+	@FXML
+	public void registerClick(ActionEvent event) {
+		String username = tfUser.getText();
+		String password = tfPwd.getText();
+		String confirm = tfConfirmPwd.getText();
+		String name = tfName.getText();
+		String phone = tfPhone.getText();
+		ResourceManager.getInstance().getMenuController().register(username, password, confirm, name, phone);
 	}
 
 }

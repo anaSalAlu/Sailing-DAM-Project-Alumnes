@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
+import cat.institutmarianao.sailing.ws.model.Trip;
 import cat.institutmarianao.sailing.ws.model.User;
 import ins.marianao.sailing.fxml.exception.OnFailedEventHandler;
 import ins.marianao.sailing.fxml.manager.ResourceManager;
@@ -136,23 +137,19 @@ public class ControllerMenu implements Initializable {
 	 */
 	@FXML
 	public void bookingMenuClick() {
-	    try {
-	        // Cargar la vista desde el FXML
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewBookingTrips.fxml"),
-	                ResourceManager.getInstance().getTranslationBundle());
+		try {
+			// Cargar la vista desde el FXML
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewBookingTrips.fxml"),
+					ResourceManager.getInstance().getTranslationBundle());
 
-	        BorderPane vista = loader.load(); 
+			BorderPane vista = loader.load();
 
-	        this.loadView(vista); 
-	    } catch (Exception e) {
-	        ControllerMenu.showError(
-	                ResourceManager.getInstance().getText("error.menu.view.opening"),
-	                e.getMessage(),
-	                ExceptionUtils.getStackTrace(e)
-	        );
-	    }
+			this.loadView(vista);
+		} catch (Exception e) {
+			ControllerMenu.showError(ResourceManager.getInstance().getText("error.menu.view.opening"), e.getMessage(),
+					ExceptionUtils.getStackTrace(e));
+		}
 	}
-
 
 	/**
 	 * Called when Trips menuItem is fired.
@@ -161,17 +158,15 @@ public class ControllerMenu implements Initializable {
 	@FXML
 	public void tripsMenuClick() {
 		try {
-			// Cargar el FXML con traducciones 
-	        FXMLLoader loader = new FXMLLoader( 
-	                getClass().getResource("ViewBookedTripsList.fxml"),
-	                ResourceManager.getInstance().getTranslationBundle()
-	        );
+			// Cargar el FXML con traducciones
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewBookedTripsList.fxml"),
+					ResourceManager.getInstance().getTranslationBundle());
 
-	        // Cargar la vista desde el FXML
-	        BorderPane vista = loader.load();
+			// Cargar la vista desde el FXML
+			BorderPane vista = loader.load();
 
-	        // Cargar la vista en la ventana actual
-	        this.loadView(vista);
+			// Cargar la vista en la ventana actual
+			this.loadView(vista);
 		} catch (Exception e) {
 			ControllerMenu.showError(ResourceManager.getInstance().getText("error.menu.view.opening"), e.getMessage(),
 					ExceptionUtils.getStackTrace(e));
@@ -282,8 +277,8 @@ public class ControllerMenu implements Initializable {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("About ...");
 		alert.setHeaderText(null);
-		alert.setContentText(
-				"Copyright@" + Calendar.getInstance(new Locale("CA", "ES")).get(Calendar.YEAR) + "\n Víctor && Ana Trinidad");
+		alert.setContentText("Copyright@" + Calendar.getInstance(new Locale("CA", "ES")).get(Calendar.YEAR)
+				+ "\n Víctor && Ana Trinidad");
 		alert.showAndWait();
 	}
 
@@ -448,6 +443,18 @@ public class ControllerMenu implements Initializable {
 			ControllerMenu.showError(ResourceManager.getInstance().getText("error.menu.view.opening"), e.getMessage(),
 					ExceptionUtils.getStackTrace(e));
 		}
+	}
+
+	public void openRescheduleForm(Trip trip) {
+		// TODO dialogo
+	}
+
+	public void openCancelForm(Trip trip) {
+		// TODO dialogo
+	}
+
+	public void openDoneForm(Trip trip) {
+		// TODO dialogo
 	}
 
 	public static Button addIconToButton(Button button, Image image, int size) {
