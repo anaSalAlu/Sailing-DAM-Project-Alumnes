@@ -22,14 +22,14 @@ public class ServiceQueryTrips extends ServiceQueryBase<Trip> {
 	public static final String PATH_REST_TRIPS = "trips";
 
 	private Category[] categories;
-	private User client;
+	private User clientUser;
 	private Date dateFrom;
 	private Status[] statuses;
 	private Date dateTo;
 
-	public ServiceQueryTrips(Category[] categories, User client, Date dateFrom, Status[] statuses, Date dateTo) {
+	public ServiceQueryTrips(Category[] categories, User clientUser, Date dateFrom, Status[] statuses, Date dateTo) {
 		this.categories = categories;
-		this.client = client;
+		this.clientUser = clientUser;
 		this.dateFrom = dateFrom;
 		this.statuses = statuses;
 		this.dateTo = dateTo;
@@ -44,28 +44,30 @@ public class ServiceQueryTrips extends ServiceQueryBase<Trip> {
 
 		// Ahora mirar si las variables no son nulas y entonces ya asignarle el
 		// parámetro
+		System.out.println("categories in query: " + categories);
 		if (categories != null) {
 			for (Category category : categories) {
-				webTarget = webTarget.queryParam("categories", category.name());
+				System.out.println("category in loop query: " + category);
+				webTarget = webTarget.queryParam("category", category.name());
 			}
 		}
 
 		if (statuses != null) {
 			for (Status status : statuses) {
-				webTarget = webTarget.queryParam("statuses", status.name());
+				webTarget = webTarget.queryParam("status", status.name());
 			}
 		}
 
-		if (client != null) {
-			webTarget = webTarget.queryParam("clients", client);
+		if (clientUser != null) {
+			webTarget = webTarget.queryParam("client", clientUser);
 		}
 
 		if (dateTo != null) {
-			webTarget = webTarget.queryParam("dateTo", dateTo);
+			webTarget = webTarget.queryParam("to", dateTo);
 		}
 
 		if (dateFrom != null) {
-			webTarget = webTarget.queryParam("dateFrom", dateFrom);
+			webTarget = webTarget.queryParam("from", dateFrom);
 		}
 
 		Invocation.Builder invocationBuilder = ResourceManager.getInstance().getAuthRequestBuilder(webTarget, true);

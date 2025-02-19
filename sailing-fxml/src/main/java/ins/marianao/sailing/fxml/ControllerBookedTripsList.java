@@ -374,6 +374,8 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 			categories = new Category[] { Category.valueOf(category.getKey()) };
 		}
 
+		System.out.println("Category in controller: " + category);
+
 		// Client
 		User client = this.cmbClient.getValue();
 
