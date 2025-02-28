@@ -74,7 +74,7 @@ public class ServiceQueryTripTypes extends ServiceQueryBase<TripType> {
 			webTarget = webTarget.queryParam("durationTo", durationTo);
 		}
 
-		Invocation.Builder invocationBuilder = ResourceManager.getInstance().getAuthRequestBuilder(webTarget, true);
+		Invocation.Builder invocationBuilder = webTarget.request();
 		List<TripType> tripTypes = new LinkedList<TripType>();
 		try {
 			Response response = invocationBuilder.get();

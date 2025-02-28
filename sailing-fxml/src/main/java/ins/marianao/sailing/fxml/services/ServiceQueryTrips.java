@@ -59,7 +59,7 @@ public class ServiceQueryTrips extends ServiceQueryBase<Trip> {
 		}
 
 		if (clientUser != null) {
-			webTarget = webTarget.queryParam("client", clientUser);
+			webTarget = webTarget.queryParam("client", clientUser.getUsername());
 		}
 
 		if (dateTo != null) {
