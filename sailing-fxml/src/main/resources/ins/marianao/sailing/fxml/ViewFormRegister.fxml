@@ -33,7 +33,7 @@
                <children>
                   <Label fx:id="lblTitle" text="%fxml.text.register.title" />
                   <ComboBox fx:id="cbRole" prefWidth="150.0" GridPane.rowIndex="1" />
-                  <Button fx:id="btnSave" mnemonicParsing="false" prefHeight="36.0" prefWidth="591.0" text="%fxml.text.register.save" GridPane.rowIndex="7" />
+                  <Button fx:id="btnSave" mnemonicParsing="false" onAction="#registerClick" prefHeight="36.0" prefWidth="591.0" text="%fxml.text.register.save" GridPane.rowIndex="7" />
                   <HBox minHeight="0.0" minWidth="0.0" prefHeight="40.0" prefWidth="174.0" styleClass="input-group" GridPane.rowIndex="2">
                      <children>
                         <Label prefHeight="52.0" prefWidth="61.0" text="%fxml.text.register.user">
@@ -51,7 +51,7 @@
                               <Font size="10.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tfUser1" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="tfPwd" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox minHeight="0.0" minWidth="0.0" prefHeight="40.0" prefWidth="174.0" styleClass="input-group" GridPane.rowIndex="4">
@@ -61,7 +61,7 @@
                               <Font size="10.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tfUser2" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="tfConfirmPwd" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox minHeight="0.0" minWidth="0.0" prefHeight="40.0" prefWidth="174.0" styleClass="input-group" GridPane.rowIndex="5">
@@ -71,7 +71,7 @@
                               <Font size="10.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tfUser3" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="tfName" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox minHeight="0.0" minWidth="0.0" prefHeight="40.0" prefWidth="174.0" styleClass="input-group" GridPane.rowIndex="6">
@@ -81,7 +81,7 @@
                               <Font size="10.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tfUser4" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="tfPhone" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                </children>
