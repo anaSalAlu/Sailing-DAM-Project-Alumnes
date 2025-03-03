@@ -30,6 +30,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 
 public class ControllerFormRegister implements Initializable {
@@ -74,6 +75,9 @@ public class ControllerFormRegister implements Initializable {
 	private TextField tfUser;
 
 	@FXML
+	private GridPane gridPane;
+
+	@FXML
 	private BorderPane viewFormRegister;
 
 	/**
@@ -83,25 +87,32 @@ public class ControllerFormRegister implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		ResourceManager manager = ResourceManager.getInstance();
 		User currentUser = manager.getCurrentUser();
-		if (!currentUser.isAdmin()) {
+
+		if (currentUser != null) {
+			if (!currentUser.isAdmin()) {
+				cbRole.setVisible(false);
+			} else {
+				cbRole.setVisible(true);
+				List<Pair<String, String>> roles = Stream.of(User.Role.values())
+						.map(new Function<Role, Pair<String, String>>() {
+							@Override
+							public Pair<String, String> apply(Role t) {
+								String key = t.name();
+								return new Pair<String, String>(key, resources.getString("text.User." + key));
+							}
+
+						}).collect(Collectors.toList());
+
+				ObservableList<Pair<String, String>> listRoles = FXCollections.observableArrayList(roles);
+				listRoles.add(0, null);
+
+				this.cbRole.setItems(listRoles);
+				this.cbRole.setConverter(Formatters.getStringPairConverter("User"));
+			}
+
+		} else {
 			cbRole.setVisible(false);
 		}
-
-		List<Pair<String, String>> roles = Stream.of(User.Role.values())
-				.map(new Function<Role, Pair<String, String>>() {
-					@Override
-					public Pair<String, String> apply(Role t) {
-						String key = t.name();
-						return new Pair<String, String>(key, resources.getString("text.User." + key));
-					}
-
-				}).collect(Collectors.toList());
-
-		ObservableList<Pair<String, String>> listRoles = FXCollections.observableArrayList(roles);
-		listRoles.add(0, null);
-
-		this.cbRole.setItems(listRoles);
-		this.cbRole.setConverter(Formatters.getStringPairConverter("User"));
 	}
 
 	@FXML
@@ -115,8 +126,6 @@ public class ControllerFormRegister implements Initializable {
 		if (!password.equals(confirm)) {
 			System.out.println("No igual");
 		}
-
-		ResourceManager manager = ResourceManager.getInstance();
 
 		Method method = ServiceSaveBase.Method.POST;
 		String[] path = new String[] { ServiceQueryUsers.PATH_REST_USERS, "save" };
@@ -133,6 +142,8 @@ public class ControllerFormRegister implements Initializable {
 		} else {
 			client = new Client();
 			client.setRole(Role.CLIENT);
+			client.setUsername(username);
+			client.setPassword(password);
 			client.setFullName(name);
 			client.setPhone(Integer.parseInt(phone));
 			newUser = new ServiceSaveUser(client, path, method, false);
@@ -151,6 +162,25 @@ public class ControllerFormRegister implements Initializable {
 
 		newUser.start();
 
+	}
+
+	public void loadUserProfile(User user) {
+		if (user != null) {
+			// Set the information of the user
+			this.cbRole.setValue(new Pair<String, String>(user.getRole().name(), user.getRole().name()));
+			this.tfUser.setText(user.getUsername());
+			this.tfPwd.setText(user.getPassword());
+
+			if (user.isAdmin()) {
+				this.tfName.setVisible(false);
+				this.tfPhone.setVisible(false);
+			} else {
+				Client client = (Client) user;
+				this.tfName.setText(client.getFullName());
+				this.tfPhone.setText(String.valueOf(client.getPhone()));
+
+			}
+		}
 	}
 
 }

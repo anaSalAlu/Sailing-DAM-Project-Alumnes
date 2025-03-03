@@ -182,6 +182,7 @@ public class ControllerMenu implements Initializable {
 	public void newUserMenuClick(ActionEvent event) {
 		// this.openUserForm(null);
 		try {
+
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewFormRegister.fxml"),
 					ResourceManager.getInstance().getTranslationBundle());
 			BorderPane vista = (BorderPane) loader.load();
@@ -427,17 +428,15 @@ public class ControllerMenu implements Initializable {
 		try {
 			// TODO Load form user view and load user profile when not null
 
-			/*
-			 * FXMLLoader loader = new
-			 * FXMLLoader(getClass().getResource("ViewFormUser.fxml"),
-			 * ResourceManager.getInstance().getTranslationBundle()); BorderPane vista =
-			 * (BorderPane)loader.load();
-			 * 
-			 * ControllerFormUser controllerFormUser = loader.getController();
-			 * controllerFormUser.loadUserProfile(user);
-			 * 
-			 * this.loadView(vista);
-			 */
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewFormRegister.fxml"),
+					ResourceManager.getInstance().getTranslationBundle());
+			BorderPane vista = (BorderPane) loader.load();
+
+			ControllerFormRegister controllerFormUser = loader.getController();
+			controllerFormUser.loadUserProfile(user);
+
+			this.loadView(vista);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			ControllerMenu.showError(ResourceManager.getInstance().getText("error.menu.view.opening"), e.getMessage(),

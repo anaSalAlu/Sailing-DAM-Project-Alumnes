@@ -193,7 +193,6 @@ public class ControllerBookingTrips implements Initializable {
 				maxPlacesFrom, maxPlacesTo, durationFrom, durationTo);
 
 		queryTripTypes.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-			int cards = 4;
 
 			@Override
 			public void handle(WorkerStateEvent event) {
