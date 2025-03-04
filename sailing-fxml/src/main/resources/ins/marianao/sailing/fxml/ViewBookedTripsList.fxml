@@ -21,9 +21,6 @@
 		<AnchorPane prefHeight="724.0" prefWidth="1548.0" styleClass="centerregion">
 			<children>
             <HBox layoutX="-4.099999904632568" layoutY="-3.0999999046325684" spacing="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-               <children>
-                  <Button fx:id="btnPDF" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#generarPDFClick" styleClass="icon-button" text="PDF" />
-               </children>
             </HBox>
             <GridPane hgap="10.0" vgap="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
               <columnConstraints>

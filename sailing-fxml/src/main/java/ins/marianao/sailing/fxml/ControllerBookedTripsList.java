@@ -34,6 +34,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -44,7 +45,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 import javafx.util.Pair;
 
-public class ControllerBookedTripsList extends AbstractControllerPDF {
+public class ControllerBookedTripsList implements Initializable {
 	List<User> client = null;
 	@FXML
 	private ComboBox<Pair<String, String>> cmbCategory;
@@ -111,7 +112,6 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
-		super.initialize(url, resource);
 
 		/*
 		 * Control de los combo box
@@ -452,7 +452,8 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 						new Image(getClass().getResourceAsStream("resources/reschedule.png"))) {
 					@Override
 					public void buttonAction(Trip trip) {
-						ResourceManager.getInstance().getMenuController();
+						ControllerMenu menu = ResourceManager.getInstance().getMenuController();
+						menu.openRescheduleForm(trip);
 					}
 				});
 
@@ -475,7 +476,8 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 						new Image(getClass().getResourceAsStream("resources/cancel.png"))) {
 					@Override
 					public void buttonAction(Trip trip) {
-						ResourceManager.getInstance().getMenuController();
+						ControllerMenu menu = ResourceManager.getInstance().getMenuController();
+						menu.openCancelForm(trip);
 					}
 				});
 
@@ -502,28 +504,14 @@ public class ControllerBookedTripsList extends AbstractControllerPDF {
 						new Image(getClass().getResourceAsStream("resources/done.png"))) {
 					@Override
 					public void buttonAction(Trip trip) {
-						ResourceManager.getInstance().getMenuController();
+						ControllerMenu menu = ResourceManager.getInstance().getMenuController();
+						menu.openDoneForm(trip);
 					}
 				});
 
 		ResourceManager.getInstance().getStage().heightProperty().addListener(event -> {
 			viewBookedTripsList.setPrefHeight(ResourceManager.getInstance().getStage().getHeight());
 		});
-	}
-
-	@Override
-	protected String htmlContentToPDF() throws Exception {
-		return null;
-	}
-
-	@Override
-	protected String documentTitle() {
-		return ResourceManager.getInstance().getText("fxml.text.viewBookingTripsList.report.title");
-	}
-
-	@Override
-	protected String documentFileName() {
-		return ResourceManager.FILE_REPORT_TRIPS_LIST;
 	}
 
 }

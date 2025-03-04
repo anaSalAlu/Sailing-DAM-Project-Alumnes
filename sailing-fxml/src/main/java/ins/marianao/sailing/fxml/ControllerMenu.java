@@ -34,6 +34,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -446,14 +447,29 @@ public class ControllerMenu implements Initializable {
 
 	public void openRescheduleForm(Trip trip) {
 		// TODO dialogo
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Reprogramar viatge");
+		dialog.setHeaderText("Introdueix nova data i hora");
+		dialog.setContentText("Data i hora: ");
+		dialog.show();
 	}
 
 	public void openCancelForm(Trip trip) {
 		// TODO dialogo
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Cancel·lar viatge");
+		dialog.setHeaderText("Motiu de la cancel·lació");
+		dialog.setContentText("Ingreseu el motiu: ");
+		dialog.show();
 	}
 
 	public void openDoneForm(Trip trip) {
 		// TODO dialogo
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Confirmar");
+		alert.setHeaderText("Esta segur de que aquest viatge està completat?");
+		alert.setContentText("Confirmar acció: ");
+		alert.show();
 	}
 
 	public static Button addIconToButton(Button button, Image image, int size) {
